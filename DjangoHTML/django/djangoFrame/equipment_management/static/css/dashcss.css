@@ -1,0 +1,12 @@
+/*Made by Mehmet*/
+
+.chart-container {
+    width: 75%; /* or any other width */
+    height: auto; /* for a responsive height based on the width */
+    margin: 5 auto; /* to center the chart if desired */
+  }
+  
+  /* Specific size for small charts */
+  .small-chart-container {
+    width: 60%; /* smaller width */
+  }

@@ -1,0 +1,69 @@
+<!--Made by Muhammed Rohail and Safir-->
+
+{% extends "base_reports.html" %}
+
+{% block content %}
+<style>
+  .div-test{
+      text-align : center;
+  }
+</style>    
+
+<script>
+  $(document).ready(function () {
+
+    $(function () {
+      $('#items-table').DataTable();
+      responsive: true
+  }); 
+      // Reservation button click handler
+      $('.buy-button').click(function () {
+          var itemId = $(this).data('item-id');
+        });
+    
+      $('.buy-button').click(function () {
+          var itemId = $(this).data('item-id');
+          var itemName = $(this).closest('tr').find('td:eq(0)').text(); // Get the item name from the second column
+          var itemType = $(this).closest('tr').find('td:eq(1)').text(); // Get the item type from the third column
+          var bookedItems = JSON.parse(localStorage.getItem('bookedItems')) || [];
+          bookedItems.push({ item_id: itemId, item_name: itemName, item_type: itemType });
+          localStorage.setItem('bookedItems', JSON.stringify(bookedItems));
+          // Show a dialog box indicating the item has been added
+          alert('Item added');
+      });
+  });
+</script>
+<h2 style="text-align: center" class="mb-4">Available Products</h2>
+<div>
+  <table style ="width:100%">
+      <thead>
+          <tr>
+              <th>Device ID</th>
+              <th>Device Name</th>
+              <th>Device Type</th>
+              <th>Device Serial</th>
+              <th>CPU</th>
+              <th>GPU</th>
+              <th>RAM</th>
+              <th>Action</th> 
+          </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+          <tr>
+            <td>{{ item.item_id }}</td>
+            <td>{{ item.name }}</td>
+              <td>{{ item.type}}</td>
+              <td>{{ item.serial }}</td>
+              <td>{{ item.cpu }}</td>
+              <td>{{ item.gpu }}</td>
+              <td>{{ item.ram }}</td>
+              <td>
+                <a href="{% url 'equipment_management:create_reservation' item_id=item.item_id %}" class="btn btn-primary">Reserve</a>
+              </td> 
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+{% endblock %}

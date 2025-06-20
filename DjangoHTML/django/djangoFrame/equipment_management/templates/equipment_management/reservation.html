@@ -1,0 +1,37 @@
+<!--Made by Muhammed Rohail and Safir-->
+
+{% extends "base_reports.html" %}
+
+{% block content %}
+<h2>My Reservations</h2>
+
+{% if reservations %}
+  <table class="table table-bordered" style="width: 100%;">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Status</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for reservation in reservations %}
+      <tr>
+        <td>{{ reservation.item.name }}</td>
+        <td>{{ reservation.status }}</td>
+        <td>
+          <!-- Form to handle deletion -->
+          <form method="post" action="{% url 'equipment_management:delete_reservation' reservation.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-remove">Remove</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>You have no reservations.</p>
+{% endif %}
+
+{% endblock %}

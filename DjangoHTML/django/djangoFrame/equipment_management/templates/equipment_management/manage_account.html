@@ -1,0 +1,47 @@
+<!--Made by Safir-->
+
+{% extends 'base_reports.html' %}
+{% block content %}
+<div class="container">
+  <h2>Manage Account</h2>
+  <form method="post" action="{% url 'equipment_management:manage_account' %}">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    <button type="submit" class="btn btn-primary">Update Details</button>
+  </form>
+
+  <h3>Change Password</h3>
+  <form method="post" action="{% url 'equipment_management:change_password' %}">
+    {% csrf_token %}
+    {{ password_form.as_p }}
+    <button type="submit" class="btn btn-primary">Change Password</button>
+  </form>
+
+  <h3>Your Reservations</h3>
+  {% if reservations %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--Iterates through reservations, with the filter specified in views-->
+        {% for reservation in reservations %} 
+          <tr>
+            <td>{{ reservation.item.name }}</td>
+            <td>{{ reservation.date|date:"Y-m-d" }}</td>
+            <td>{{ reservation.time|time:"H:i" }}</td>
+            <td>{{ reservation.status }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No reservations to display.</p>
+  {% endif %}
+</div>
+{% endblock %}

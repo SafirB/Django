@@ -1,0 +1,26 @@
+<!--Made by Berk and Safir-->
+
+{% extends "auth_base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center">Login</h2>
+    <form method="post" action="{% url 'equipment_management:login' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="id_username" name="username" placeholder="Your username" required>
+        </div>
+        <div class="mb-3">
+            <label for="id_password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="id_password" name="password" placeholder="Your password" required>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+        <div class="form-group">
+            <p>Don't have an account? <a href="{% url 'equipment_management:signup' %}">Sign up</a></p>
+        </div>
+    </form>
+</div>
+{% endblock %}

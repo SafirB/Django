@@ -1,0 +1,25 @@
+<!--Made by Jarkynai and Safir -->
+
+{% extends 'base_reports.html' %}
+
+{% block content %}
+<h2>Equipment Usage History</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>User</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reservation in reservations %}
+        <tr>
+            <td>{{ reservation.item.name }}</td>
+            <td>{{ reservation.user.username }}</td>
+            <td>{{ reservation.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

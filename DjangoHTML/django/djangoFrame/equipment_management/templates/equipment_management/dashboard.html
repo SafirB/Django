@@ -1,0 +1,199 @@
+<!--Mehmet and Safir-->
+
+{% extends 'base_reports.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<!-- Unique dashboard content -->
+<h1 class="my-4">Dashboard</h1>
+<h4>Welcome, Admin</h4>
+
+<!-- Dashboard specific content -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="chart-container">
+            <h4>Total Reservations</h4>
+            <canvas id="TotalReservChart"></canvas>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="chart-container">
+            <h4>Number of Current Reservations</h4>
+            <canvas id="CurrentInvChart"></canvas>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="small-chart-container">
+            <h4>Total Accounts</h4>
+            <canvas id="TotalAc"></canvas>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="small-chart-container">
+            <h4>Reservation Report</h4>
+            <canvas id="ReservReport"></canvas>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Initialize Charts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Line Chart for Total Reservations
+    const ctxTotalReservChart = document.getElementById('TotalReservChart').getContext('2d');
+    new Chart(ctxTotalReservChart, {
+        type: 'line',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: 'Number of Stocks',
+                data: [12, 19, 3, 5, 2, 3],
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+</script>
+
+
+  <!-- bar -->
+  <script>
+    const ctx2 = document.getElementById('CurrentInvChart');
+  
+    new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: 'Number of Stocks',
+          data: [12, 19, 3, 5, 10, 3],
+          borderWidth: 1,
+          backgroundColor:['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          
+        }]
+      },
+      options: {
+        
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+
+
+  <!-- doughnut of Total Account-->
+  <script>
+    const ctx4 = document.getElementById('TotalAc');
+  
+    new Chart(ctx4, {
+      type: 'doughnut',
+      data: {
+        labels: ['New Accounts', 'Old Accounts'],
+        datasets: [{
+          label: 'Number of Stocks',
+          data: [12, 19],
+          borderWidth: 1,
+          backgroundColor: ["#7E7E7E","#BDBDBD"],
+        }]
+      },
+      options: {
+        tooltips: {
+                enabled: false
+            },
+            plugins: {
+              
+            datalabels: {
+              formatter: (value, categories) => {
+                let sum = 0;
+                        let dataArr = categories.chart.data.datasets[0].data;
+                        dataArr.map(data => {
+                            sum += data;
+                        });
+                        let percentage = (value*100 / sum).toFixed(2)+"%";
+                        return percentage;
+
+              }
+            },
+            },
+
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+          
+        }
+      }
+    });
+  </script>
+
+
+  <!-- doughnut -->
+  <script>
+    const ctx = document.getElementById('ReservReport');
+  
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Electronics', 'Equipment', 'Other'],
+        datasets: [{
+          label: 'Number of Stocks',
+          data: [12, 19, 3],
+          borderWidth: 1,
+          backgroundColor: ["#9D9D9D","#7E7E7E","#BDBDBD"],
+        }]
+      },
+      options: {
+        tooltips: {
+                enabled: false
+            },
+            plugins: {
+
+              legend: {
+                display: true,
+                position: 'right'
+              },
+              
+            datalabels: {
+              formatter: (value, categories) => {
+                let sum = 0;
+                        let dataArr = categories.chart.data.datasets[0].data;
+                        dataArr.map(data => {
+                            sum += data;
+                        });
+                        let percentage = (value*100 / sum).toFixed(2)+"%";
+                        return percentage;
+
+              }
+            },
+            },
+
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+          
+        }
+      }
+    });
+  </script>
+{% endblock scripts %}
+
+
+
+ </html>

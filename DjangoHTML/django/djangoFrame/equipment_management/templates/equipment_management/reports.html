@@ -1,0 +1,51 @@
+<!--Made by Jarkynai and Safir-->
+
+{% extends 'base_reports.html' %}
+
+{% block title %}Reports Page{% endblock %}
+
+{% block content %}
+<h2>Reports</h2>
+<div class="report_middle">
+    <div class="mb-5">
+        <input class="w-25 form-control" onkeyup="myFunction()" id="myInput" type="text" placeholder="Search..">
+    </div>
+    <div class="table-responsive-md d-flex justify-content-center">
+        <table class="table table-hover" id="myTable">
+            <thead>
+                <tr>
+                    <th scope="col">Report Name</th>
+                    <th scope="col">Date</th>
+                    <th class="text-center" scope="col">View</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span><h5>•</h5></span>Current Inventory</td>
+                    <td>18/7/2023</td>
+                    <td class="text-center">
+                        <a href="{% url 'equipment_management:view_inventory' %}" class="btn btn-primary">View Report</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span><h5>•</h5></span>Equipment Usage History</td>
+                    <td>18/7/2023</td>
+                    <td class="text-center">
+                    <a href="{% url 'equipment_management:equipment_usage_history' %}" class="btn btn-primary">View Report</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span><h5>•</h5></span>Warranty</td>
+                    <td>18/7/2023</td>
+                    <td class="text-center"><button><i class="fa fa-download" aria-hidden="true"></i></button></td>
+                </tr>
+                <tr>
+                    <td><span><h5>•</h5></span>Overdue Equipment</td>
+                    <td>18/7/2023</td>
+                    <td class="text-center"><button><i class="fa fa-download" aria-hidden="true"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
